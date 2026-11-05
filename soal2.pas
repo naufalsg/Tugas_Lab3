@@ -1,28 +1,31 @@
-program nopal;
+program soal2;
+uses crt;
+
+function prima(n : integer) : boolean;
 var
-  nilai : array[1..10] of integer;
-  n, i, j, temp : integer;
+    i : integer;
 begin
-  write('Masukkan jumlah mahasiswa (1-10): ');
-  readln(n);
+    prima := n >= 2;
+    i := 2;
+    while prima and (i * i <= n) do
+    begin
+        if n mod i = 0 then
+            prima := false;
+        i := i + 1;
+    end;
+end;
 
-  for i := 1 to n do
-  begin
-    write('Nilai UAS mahasiswa ke-', i, ': ');
-    readln(nilai[i]);
-  end;
+var
+    n : integer;
 
-  for i := 1 to n - 1 do
-    for j := 1 to n - i do
-      if nilai[j] > nilai[j + 1] then
-      begin
-        temp := nilai[j];
-        nilai[j] := nilai[j + 1];
-        nilai[j + 1] := temp;
-      end;
+begin
+    clrscr;
+    write('Angka : ');
+    readln(n);
 
-  writeln('Nilai terurut dari terendah ke tertinggi:');
-  for i := 1 to n do
-    write(nilai[i], ' ');
-  writeln;
+    if prima(n) then
+        writeln('Prima')
+    else
+        writeln('Non-Prima');
+    readln;
 end.
